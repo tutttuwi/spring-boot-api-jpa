@@ -1,40 +1,36 @@
 package com.example.system.controller.impl;
 
-import com.example.system.controller.UserController;
-import com.example.system.controller.model.GetUsersRequest;
-import com.example.system.domain.service.UserService;
-import com.example.system.domain.service.impl.UserServiceImpl;
+import com.example.system.controller.model.SystemErrorResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.webjars.NotFoundException;
 
 @Slf4j
-@RestController
-public class UserControllerImpl extends AbstractBaseController implements UserController {
-
-    @Autowired
-    UserService userService;
+@Controller
+@RequestMapping("/error")
+public class ErrorControllerImpl extends AbstractBaseController implements ErrorController {
 
     /**
      * コンストラクター
-     *
-     * @param userService
      */
-    UserControllerImpl(UserServiceImpl userService) {
-        userService = userService;
+    ErrorControllerImpl() {
     }
 
-    @Override
-    public Object getUsers(GetUsersRequest userListReq, BindingResult result) throws Throwable {
-        return "OK!!a!";
+    /**
+     * JSON レスポンス用の ResponseEntity オブジェクトを返す。
+     *
+     * @return JSON レスポンス用の ResponseEntity オブジェクト
+     */
+    @RequestMapping
+    public ResponseEntity<Object> error() {
+        // Create Response
+        SystemErrorResponse response = new SystemErrorResponse(HttpStatus.NOT_FOUND, new NotFoundException("Not Found Resouces"));
+        // Return Json
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
-
-    @Override
-    public Object getUser(Long userId) throws Throwable {
-        log.info(String.valueOf(userId));
-        return null;
-    }
-
 
 }

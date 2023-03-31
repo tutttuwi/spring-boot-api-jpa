@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- DOCUMENT -->
+    <!-- pattern: https://xy2401.com/local-docs/java/logback/manual/layouts_ja.html -->
+
+    <!-- INCLUDE DEFAULT SETTING -->
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+    <!-- PROPERTY VALUE HERE -->
+    <timestamp key="LOG_DATE" datePattern="yyyyMMdd"/>
+    <property name="LOG_FILE" value="/var/log/spring/system-app.log"/>
+
+    <!-- PROFILE -->
+    <springProfile name="dev">
+        <!-- CONSOLE APPENDER (customize here) -->
+
+        <!-- FILE APPENDER (customize here) -->
+        <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <encoder>
+                <pattern>${FILE_LOG_PATTERN}</pattern>
+            </encoder>
+            <file>${LOG_FILE}</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${LOG_FILE}.%d{yyyyMMdd}</fileNamePattern>
+                <maxHistory>5</maxHistory>
+            </rollingPolicy>
+        </appender>
+
+        <!-- LOG LEVEL SETTINGS -->
+        <root level="TRACE">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="FILE"/>
+        </root>
+    </springProfile>
+
+    <!-- PROFILE -->
+    <springProfile name="prod">
+        <!-- CONSOLE APPENDER (customize here) -->
+
+        <!-- FILE APPENDER (customize here) -->
+        <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <encoder>
+                <pattern>${FILE_LOG_PATTERN}</pattern>
+            </encoder>
+            <file>${LOG_FILE}</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${LOG_FILE}.%d{yyyyMMdd}</fileNamePattern>
+                <maxHistory>5</maxHistory>
+            </rollingPolicy>
+        </appender>
+
+        <!-- LOG LEVEL SETTINGS -->
+        <root level="TRACE">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="FILE"/>
+        </root>
+    </springProfile>
+
+</configuration>

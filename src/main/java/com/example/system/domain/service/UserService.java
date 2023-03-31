@@ -8,7 +8,11 @@ import java.util.List;
 
 @Transactional
 @Service
-interface UserService {
+public interface UserService {
 
-    public List<UserDto> searchUserList();
+    public List<UserDto> searchUserList(UserDto userDto);
+    public UserDto searchUser(Long userId);
+    public UserDto createUser(UserDto userDto);
+    public UserDto updateUser(UserDto userDto);
+    public void deleteUser(Long userId);
 }

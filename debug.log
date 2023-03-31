@@ -1,0 +1,34 @@
+
+> Task :hbm2java
+Errors occurred while build effective model from C:\Users\Tomo\.gradle\caches\modules-2\files-2.1\org.eclipse.platform\org.eclipse.core.expressions\3.8.200\eb159f34083b0135459745f934a6ad5eb61b61c\org.eclipse.core.expressions-3.8.200.pom:
+	'modelVersion' must be one of [4.0.0] but is '4.0'. in org.eclipse.platform:org.eclipse.core.expressions:3.8.200
+Errors occurred while build effective model from C:\Users\Tomo\.gradle\caches\modules-2\files-2.1\org.eclipse.platform\org.eclipse.equinox.registry\3.11.200\2e5cadcdfd1c614d8abfa7cc1998acbda52ffaa9\org.eclipse.equinox.registry-3.11.200.pom:
+	'modelVersion' must be one of [4.0.0] but is '4.0'. in org.eclipse.platform:org.eclipse.equinox.registry:3.11.200
+Errors occurred while build effective model from C:\Users\Tomo\.gradle\caches\modules-2\files-2.1\org.eclipse.platform\org.eclipse.equinox.preferences\3.10.100\43fe3c49d5a6a30090b7081015e4a57bd0a6cb98\org.eclipse.equinox.preferences-3.10.100.pom:
+	'modelVersion' must be one of [4.0.0] but is '4.0'. in org.eclipse.platform:org.eclipse.equinox.preferences:3.10.100
+Errors occurred while build effective model from C:\Users\Tomo\.gradle\caches\modules-2\files-2.1\org.eclipse.platform\org.eclipse.core.contenttype\3.8.200\e2fdb068262514474d73f236adaa821d9c861786\org.eclipse.core.contenttype-3.8.200.pom:
+	'modelVersion' must be one of [4.0.0] but is '4.0'. in org.eclipse.platform:org.eclipse.core.contenttype:3.8.200
+Errors occurred while build effective model from C:\Users\Tomo\.gradle\caches\modules-2\files-2.1\org.eclipse.platform\org.eclipse.equinox.app\1.6.200\f33fbc773b43924a1e994e5193d1195c5b0a19e3\org.eclipse.equinox.app-1.6.200.pom:
+	'modelVersion' must be one of [4.0.0] but is '4.0'. in org.eclipse.platform:org.eclipse.equinox.app:1.6.200
+Errors occurred while build effective model from C:\Users\Tomo\.gradle\caches\modules-2\files-2.1\org.eclipse.platform\org.eclipse.core.filesystem\1.9.500\a1703333901fc0ef24de65515b0a96dc02fb6175\org.eclipse.core.filesystem-1.9.500.pom:
+	'modelVersion' must be one of [4.0.0] but is '4.0'. in org.eclipse.platform:org.eclipse.core.filesystem:1.9.500
+CLASSPATH element C:\Users\Tomo\.gradle\caches\modules-2\files-2.1\org.hibernate\hibernate-c3p0\6.1.7.Final\f119cae121ac224abfa6f24fa28afd22f7a9fc61\hibernate-c3p0-6.1.7.Final.pom is not a JAR.
+CLASSPATH element C:\Users\Tomo\.gradle\caches\modules-2\files-2.1\org.hibernate\hibernate-c3p0\6.1.7.Final\f119cae121ac224abfa6f24fa28afd22f7a9fc61\hibernate-c3p0-6.1.7.Final.pom is not a JAR.
+CLASSPATH element C:\Users\Tomo\.gradle\caches\modules-2\files-2.1\org.hibernate\hibernate-c3p0\6.1.7.Final\f119cae121ac224abfa6f24fa28afd22f7a9fc61\hibernate-c3p0-6.1.7.Final.pom is not a JAR.
+CLASSPATH element C:\Users\Tomo\.gradle\caches\modules-2\files-2.1\org.hibernate\hibernate-c3p0\6.1.7.Final\f119cae121ac224abfa6f24fa28afd22f7a9fc61\hibernate-c3p0-6.1.7.Final.pom is not a JAR.
+CLASSPATH element C:\Users\Tomo\.gradle\caches\modules-2\files-2.1\org.hibernate\hibernate-c3p0\6.1.7.Final\f119cae121ac224abfa6f24fa28afd22f7a9fc61\hibernate-c3p0-6.1.7.Final.pom is not a JAR.
+CLASSPATH element C:\Users\Tomo\.gradle\caches\modules-2\files-2.1\org.hibernate\hibernate-c3p0\6.1.7.Final\f119cae121ac224abfa6f24fa28afd22f7a9fc61\hibernate-c3p0-6.1.7.Final.pom is not a JAR.
+CLASSPATH element C:\Users\Tomo\.gradle\caches\modules-2\files-2.1\org.hibernate\hibernate-c3p0\6.1.7.Final\f119cae121ac224abfa6f24fa28afd22f7a9fc61\hibernate-c3p0-6.1.7.Final.pom is not a JAR.
+CLASSPATH element C:\Users\Tomo\.gradle\caches\modules-2\files-2.1\org.hibernate\hibernate-c3p0\6.1.7.Final\f119cae121ac224abfa6f24fa28afd22f7a9fc61\hibernate-c3p0-6.1.7.Final.pom is not a JAR.
+CLASSPATH element C:\Users\Tomo\.gradle\caches\modules-2\files-2.1\org.hibernate\hibernate-c3p0\6.1.7.Final\f119cae121ac224abfa6f24fa28afd22f7a9fc61\hibernate-c3p0-6.1.7.Final.pom is not a JAR.
+CLASSPATH element C:\Users\Tomo\.gradle\caches\modules-2\files-2.1\org.hibernate\hibernate-c3p0\6.1.7.Final\f119cae121ac224abfa6f24fa28afd22f7a9fc61\hibernate-c3p0-6.1.7.Final.pom is not a JAR.
+CLASSPATH element C:\Users\Tomo\.gradle\caches\modules-2\files-2.1\org.hibernate\hibernate-c3p0\6.1.7.Final\f119cae121ac224abfa6f24fa28afd22f7a9fc61\hibernate-c3p0-6.1.7.Final.pom is not a JAR.
+CLASSPATH element C:\Users\Tomo\.gradle\caches\modules-2\files-2.1\org.hibernate\hibernate-c3p0\6.1.7.Final\f119cae121ac224abfa6f24fa28afd22f7a9fc61\hibernate-c3p0-6.1.7.Final.pom is not a JAR.
+CLASSPATH element C:\Users\Tomo\.gradle\caches\modules-2\files-2.1\org.hibernate\hibernate-c3p0\6.1.7.Final\f119cae121ac224abfa6f24fa28afd22f7a9fc61\hibernate-c3p0-6.1.7.Final.pom is not a JAR.
+CLASSPATH element C:\Users\Tomo\.gradle\caches\modules-2\files-2.1\org.hibernate\hibernate-c3p0\6.1.7.Final\f119cae121ac224abfa6f24fa28afd22f7a9fc61\hibernate-c3p0-6.1.7.Final.pom is not a JAR.
+HHH000022: c3p0 properties were encountered, but the c3p0 provider class was not found on the classpath; these properties are going to be ignored.
+HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+CLASSPATH element C:\Users\Tomo\.gradle\caches\modules-2\files-2.1\org.hibernate\hibernate-c3p0\6.1.7.Final\f119cae121ac224abfa6f24fa28afd22f7a9fc61\hibernate-c3p0-6.1.7.Final.pom is not a JAR.
+
+BUILD SUCCESSFUL in 4s
+1 actionable task: 1 executed

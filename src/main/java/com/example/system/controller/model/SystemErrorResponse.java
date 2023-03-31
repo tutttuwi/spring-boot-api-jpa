@@ -1,28 +1,25 @@
 package com.example.system.controller.model;
 
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatusCode;
-import org.springframework.http.ProblemDetail;
-import org.springframework.stereotype.Component;
-import org.springframework.web.ErrorResponse;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import org.springframework.http.HttpStatus;
 
-import java.io.Serializable;
+import java.time.ZonedDateTime;
 
-@Slf4j
-@Builder
-public class SystemErrorResponse implements ErrorResponse {
-    private String errorCode;
-    private String errorMessage;
+/**
+ * システムレスポンス 処理失敗.<br/>
+ */
+@Getter
+public class SystemErrorResponse extends SystemAbstractResponse {
+    @JsonProperty("error")
+    private String error;
+    @JsonProperty("message")
+    private String message;
 
-    @Override
-    public HttpStatusCode getStatusCode() {
-        return null;
-    }
-
-    @Override
-    public ProblemDetail getBody() {
-        return null;
+    public SystemErrorResponse(HttpStatus status, Exception ex) {
+        this.setTimestamp(ZonedDateTime.now());
+        this.setStatus(status.value());
+        this.error = status.getReasonPhrase();
+        this.message = ex.getMessage();
     }
 }

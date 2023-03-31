@@ -1,0 +1,36 @@
+# Development
+
+spring:
+  datasource:
+    #    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=dev
+    url: jdbc:postgresql://localhost:15432/root?currentSchema=public
+    username: root
+    password: root
+    driverClassName: org.postgresql.Driver
+  #  datasource:
+  #    #url: jdbc:h2:mem:demodb;MODE=PostgreSQL;INIT=RUNSCRIPT FROM 'src/main/resources/schema-h2.sql'\;SET SCHEMA dev
+  #    url: jdbc:h2:mem:demodb;MODE=PostgreSQL
+  #    username: sa
+  #    password: dm
+  #    driver-class-name: org.h2.Driver
+  #  h2:
+  #    console:
+  #      enabled: true # h2 console access <http://localhost:8080/system/h2-console>
+  devtools:
+    restart:
+      #exclude: "**/*.yml, **/*.xml" # 再起動のトリガーから除外するファイルを設定（上書）
+      additional-exclude: "**/*.yml, **/*.xml" # 再起動のトリガーから除外するファイルを追加で設定
+      livereload.enabled: true # LiveReloadを有効にする（デフォルトでTRUEなので必要あればFalseを設定）
+
+settings:
+  uri:
+    schema: http
+    host: localhost:8080
+
+logging:
+  level:
+    root: info
+    #    com: debug
+    #    org: debug
+    #    org.springframework: DEBUG
+    

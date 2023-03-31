@@ -1,0 +1,13 @@
+# Production
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=dev
+    username: postgres
+    password:
+    schema: prd
+    driverClassName: org.postgresql.Driver
+
+logging:
+  level:
+    root: info

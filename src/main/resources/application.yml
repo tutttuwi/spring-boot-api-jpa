@@ -1,0 +1,72 @@
+# refer to the Common Application properties
+# <https://docs.spring.io/spring-boot/docs/current/reference/html/appendix-application-properties.html#common-application-properties>
+spring:
+  profiles:
+    active: dev # default active profile
+  application:
+    name: system-app-name # CUSTOM YOUR APP NAME HERE
+  messages:
+    basename: i18n/messages # message file path (exclude extension)
+  output:
+    ansi.enabled: ALWAYS
+  jpa.properties.hibernate.format_sql: true
+  jpa:
+    database: POSTGRESQL
+    hibernate:
+      ddl-auto: none
+#    show-sql: true # logging側で制御
+
+# Spring Boot Actuator Properties
+# basically, you should expose "health" endpoint only.
+# <https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html#appendix.application-properties.actuator>
+# health check: <http://localhost:18081/actuator/health>
+# confirm di bean : <http://localhost:18081/actuator/beans>
+# confirm env settings : <http://localhost:18081/actuator/env>
+# confirm url mappings : <http://localhost:18081/actuator/mappings>
+# confirm loggers : <http://localhost:18081/actuator/loggers>
+# shutdown app : <http://localhost:18081/actuator/shutdown>
+management:
+  # ActuatorのLISTENポートを変更し、一般利用者には公開しない
+  server:
+    port: 18081
+    # localhostからのリクエストのみ有効とする
+    #    address: 127.0.0.1
+    #  endpoints:
+    #    web:
+    #      exposure:
+    #        include: "*" # すべて有効
+    #enabled-by-default: false # すべてを無効
+  endpoint:
+    health:
+      enabled: true
+
+server:
+  port: 8080
+  servlet:
+    context-path: /system
+  #  error:
+  #    path: "/error"
+
+## プロジェクト個別設定
+#settings:
+#  password:
+#    secret: your-app-secret
+#    iterations: 100
+#    hashWidth: 256
+#
+
+logging:
+  pattern:
+    # MDCで設定した値を出力する TODO: 設定調整
+    level: "[%X{X_TRACK_ID}:%X{X_SESSION_ID}:%X{X_REQUEST_ID}] %5p"
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type.descriptor.sql.BasicBinder: trace
+
+# SpringDoc
+# @see <https://springdoc.org/v2/#properties>
+# @url <http://localhost:8080/system/swagger-ui.html>
+springdoc:
+  api-docs.path=/api-docs
+  swagger-ui.path=/swagger-ui.html
+

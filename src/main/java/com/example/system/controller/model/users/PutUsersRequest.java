@@ -1,4 +1,4 @@
-package com.example.system.controller.model;
+package com.example.system.controller.model.users;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;

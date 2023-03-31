@@ -1,0 +1,219 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.0.4'
+    id 'io.spring.dependency-management' version '1.1.0'
+//    id "org.hibernate.gradle.tools" version "1.2.4"
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+configurations {
+//    developmentOnly
+//    runtimeClasspath {
+//        extendsFrom developmentOnly
+//    }
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+    testRuntime
+}
+
+apply plugin: 'idea'
+idea {
+    module {
+        inheritOutputDirs = false
+        outputDir = file("$buildDir/classes/java/main/")
+        sourceDirs += file("build/generated/source/apt/main")
+        generatedSourceDirs += file("build/generated/source/apt/main")
+    }
+}
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-web-services'
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // SpringDoc2 SpringBoot3対応
+    // @see : <https://springdoc.org/v2/>
+    // access : <http://localhost:8080/system/swagger-ui/index.html>
+    // https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui
+    implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.0.4'
+
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-aop
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-aop', version: '3.0.4'
+
+    // For Validation
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // SpringBoot Actuator (For monitoring app)
+    // デフォルトではシャットダウンを除く全てのエンドポイントが有効になる
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-actuator
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '3.0.4'
+
+    implementation 'org.apache.commons:commons-dbcp2'
+    // https://mvnrepository.com/artifact/org.postgresql/postgresql
+    implementation group: 'org.postgresql', name: 'postgresql', version: '42.5.4'
+    // https://mvnrepository.com/artifact/com.h2database/h2
+    testImplementation group: 'com.h2database', name: 'h2', version: '2.1.214'
+    runtimeOnly 'com.h2database:h2'
+
+    // ---------- QueryDSL 設定 [START] ----------
+//    implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
+//    annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
+//    annotationProcessor "jakarta.annotation:jakarta.annotation-api"
+//    annotationProcessor "jakarta.persistence:jakarta.persistence-api"
+//    implementation 'com.querydsl:querydsl-sql:5.0.0'
+    // ---------- QueryDSL 設定 [END] ----------
+
+    // https://mvnrepository.com/artifact/org.modelmapper/modelmapper
+    implementation group: 'org.modelmapper', name: 'modelmapper', version: '3.1.1'
+
+    // ---------- Hibernate JPA 2 Static-Metamodel Generator [START] ----------
+    annotationProcessor('org.hibernate:hibernate-jpamodelgen:6.1.7.Final')
+    // ---------- Hibernate JPA 2 Static-Metamodel Generator [END] ----------
+
+    // Spring Data JPA で hibernateLazyInitializer を Jackson が JSON シリアライズできなくてエラーになる
+    // @see <htt
+    // ps://qiita.com/niwasawa/items/9735d5dc4a4a71e84ccd>
+    testRuntime 'com.fasterxml.jackson.datatype:jackson-datatype-hibernate5'
+
+    // SLF4Jでエラーになる
+//    testRuntime(group: 'org.hibernate', name: 'testRuntime', version: '5.3.6.Final') {
+//        exclude module: 'log4j'
+//        exclude module: 'slf4j-log4j12'
+//    }
+    testRuntime group: 'org.hibernate', name: 'hibernate-tools', version: '5.4.32.Final'
+    testRuntime files('lib/postgresql-42.5.4.jar')
+// https://mvnrepository.com/artifact/org.hibernate/hibernate-c3p0
+    testRuntime group: 'org.hibernate', name: 'hibernate-c3p0', version: '6.1.7.Final', ext: 'pom'
+
+    // https://mvnrepository.com/artifact/org.hibernate.orm/hibernate-c3p0
+//    testRuntime group: 'org.hibernate.orm', name: 'hibernate-c3p0', version: '6.2.0.CR4'
+    // https://mvnrepository.com/artifact/org.hibernate.common/hibernate-commons-annotations
+//    testRuntime group: 'org.hibernate.common', name: 'hibernate-commons-annotations', version: '6.0.6.Final'
+
+
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+// ---------- QueryDSL 設定 [START] ----------
+//def querydslDir = "$buildDir/generated/querydsl"
+//
+//sourceSets {
+//    main.java.srcDirs += [querydslDir]
+//}
+//
+//tasks.withType(JavaCompile) {
+//    options.annotationProcessorGeneratedSourcesDirectory = file(querydslDir)
+//}
+//
+//clean.doLast {
+//    file(querydslDir).deleteDir()
+//}
+// ---------- QueryDSL 設定 [END] ----------
+
+// ---------- Hibernate JPA 2 Static-Metamodel Generator [START] ----------
+tasks.withType(JavaCompile) {
+    options.generatedSourceOutputDirectory = file("src/metamodel/java")
+}
+
+// パラメータチェック
+// @see <https://qiita.com/niwasawa/items/65134c280ed381e03855>
+//tasks.withType(JavaCompile) {
+//    options.compilerArgs << '-Xlint:unchecked'
+//}
+
+sourceSets {
+//    generated {
+//        java {
+//            srcDirs = ['src/metamodel/java']
+//        }
+//    }
+    // ClassPath設定
+//    main {
+//        java {
+//            srcDirs = ['src/main/java', 'src/hbm2java/java', 'src/metamodel/java']
+//        }
+//    }
+}
+// ---------- Hibernate JPA 2 Static-Metamodel Generator [END] ----------
+
+
+// ---------- Hibernate Tools [START] ----------
+//task hbm2java {
+//    def basePackage = "com.hoge.entity.jpa.gen"
+//    def resourcesDir = "$projectDir/src/main/resources"
+//    def srcDir = "$projectDir/src/main/java"
+//    def preparedJdbcConfiguration = [
+//            propertyfile: resourcesDir + "/hibernate.properties",
+//            revengfile  : resourcesDir + "/hibernate.reveng.xml",
+//            packagename : basePackage
+//    ]
+//
+//    doLast {
+//        project.ant {
+//            taskdef(
+//                    name: "hibernatetool",
+//                    classname: "org.hibernate.tool.ant.HibernateToolTask",
+//                    classpath: configurations.testRuntime.asPath
+//            )
+//            hibernatetool(destdir: srcDir,
+//                    templatepath: 'templates'
+//            ) {
+//                jdbcconfiguration(preparedJdbcConfiguration)
+//                classpath {
+//                    pathelement(path: "config")
+//                }
+//                hbm2java(jdk5: true, ejb3: true)
+//            }
+//        }
+//    }
+//}
+task hbm2java {
+    // ----- タスク初期化時定義される変数 ----- //
+    def basePackage = "com.example.system.domain.model.entity"
+    def resourcesDir = "$projectDir/src/main/resources"
+    def srcDir = "$projectDir/src/main/java"
+    def preparedJdbcConfiguration = [
+            propertyfile: resourcesDir + "/hibernate.properties",
+            revengfile  : resourcesDir + "/hibernate.reveng.xml",
+            packagename : basePackage
+    ]
+    // ----- タスク前処理 ----- //
+    doFirst {
+        delete "src/hbm2java/java"
+    }
+    // ----- タスク後処理 ----- //
+    doLast {
+        project.ant {
+            taskdef(
+                    name: "hibernatetool",
+                    classname: "org.hibernate.tool.ant.HibernateToolTask",
+                    classpath: configurations.testRuntime.asPath
+            )
+            hibernatetool(destdir: "src/hbm2java/java"
+//                    templatepath: 'templates'
+            ) {
+                jdbcconfiguration(preparedJdbcConfiguration)
+                classpath {
+                    pathelement(path: "config")
+                }
+                ant.hbm2java(jdk5: true, ejb3: true)
+            }
+        }
+    }
+}
+// ---------- Hibernate Tools [END] ----------

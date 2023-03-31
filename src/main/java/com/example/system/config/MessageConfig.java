@@ -1,4 +1,4 @@
-package me.tutttuwi.springboot.management.config;
+package com.example.system.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -9,8 +9,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * Validation用プロパティとメッセージプロパティを統合.
- *
- * @author Tomo
  *
  */
 @Configuration

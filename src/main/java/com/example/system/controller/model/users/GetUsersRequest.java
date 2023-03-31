@@ -1,7 +1,8 @@
-package com.example.system.controller.model;
+package com.example.system.controller.model.users;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.Serializable;
 import java.time.LocalDate;
