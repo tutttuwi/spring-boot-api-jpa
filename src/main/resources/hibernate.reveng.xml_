@@ -3,6 +3,7 @@
         SYSTEM "http://hibernate.org/dtd/hibernate-reverse-engineering-3.0.dtd">
 
 <hibernate-reverse-engineering>
-    <schema-selection match-catalog="hoge_db" match-schema=".*" match-table="foo" />
-    <schema-selection match-catalog="hoge_db" match-schema=".*" match-table="bar" />
+    <schema-selection match-schema="public"></schema-selection>
+    <schema-selection match-catalog=".*" match-schema=".*" match-table="user_info" />
+<!--    <schema-selection match-catalog=".*" match-schema=".*" match-table="user_email" />-->
 </hibernate-reverse-engineering>
