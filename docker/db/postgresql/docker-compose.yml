@@ -2,7 +2,7 @@ version: "2"
 services:
   postgresql:
     image: postgres:10.5
-    container_name: postgresql
+    container_name: spring-boot-api-jpa-postgresql
     ports:
       - 15432:5432
     volumes:

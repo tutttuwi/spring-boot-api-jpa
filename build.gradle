@@ -19,7 +19,15 @@ configurations {
     compileOnly {
         extendsFrom annotationProcessor
     }
+    // for hibernate tools
     testRuntime
+
+    // ----- Integration Test Settings [START] -----
+    // testImplementation,testRuntimeOnlyのDependenciesを継承する
+    integrationTestImplementation.extendsFrom testImplementation
+    integrationTestRuntime.extendsFrom testRuntimeOnly
+    // ----- Integration Test Settings [END] -----
+
 }
 
 apply plugin: 'idea'
@@ -40,6 +48,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-web-services'
     implementation 'org.jetbrains:annotations:24.0.1'
+    implementation 'org.testng:testng:7.1.0'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
@@ -105,7 +114,6 @@ dependencies {
     // https://mvnrepository.com/artifact/org.hibernate.common/hibernate-commons-annotations
 //    testRuntime group: 'org.hibernate.common', name: 'hibernate-commons-annotations', version: '6.0.6.Final'
 
-
 }
 
 tasks.named('test') {
@@ -139,7 +147,7 @@ tasks.withType(JavaCompile) {
 //    options.compilerArgs << '-Xlint:unchecked'
 //}
 
-sourceSets {
+//sourceSets {
 //    generated {
 //        java {
 //            srcDirs = ['src/metamodel/java']
@@ -151,7 +159,7 @@ sourceSets {
 //            srcDirs = ['src/main/java', 'src/hbm2java/java', 'src/metamodel/java']
 //        }
 //    }
-}
+//}
 // ---------- Hibernate JPA 2 Static-Metamodel Generator [END] ----------
 
 
@@ -227,9 +235,10 @@ test.finalizedBy jacocoTestReport // testタスクの後にレポート作成
 jacocoTestReport {
     reports {
         // 必要に応じてレポート作成
-        xml.enabled(true)
-        csv.enabled(false)
-        html.enabled(true)
+        // xml.enabled(true) -> enabled is deprecated. use required instead @see <https://stackoverflow.com/questions/73546718/changing-enabled-to-required-throws-an-error-in-gradle>
+        xml.required = true
+        csv.required = false
+        html.required = true
         // 必要に応じて出力先変更
 //        html.destination file("${buildDir}/reports/html/jacoco")
 //        xml.destination file("${buildDir}/reports/xml/jacoco")
@@ -239,6 +248,7 @@ jacocoTestReport {
 // ---------- jacoco(Java Code Coverage Tools) [END] ----------
 
 // ---------- sonar qube [START] ----------
+//test.finalizedBy sonar // testタスクの後にレポート作成
 sonarqube {
     properties {
         // 特定のクラスを除外したい場合設定
@@ -250,4 +260,33 @@ sonarqube {
     }
 }
 // ---------- sonar qube [END] ----------
+
+
+// ---------- Integration Test Settings [START] ----------
+sourceSets {
+    integrationTest {
+//        compileClasspath += sourceSets.main.output
+//        runtimeClasspath += sourceSets.main.output
+        java {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir file('src/integration-test/java')
+        }
+        resources.srcDir file('src/integration-test/resources')
+    }
+}
+
+task integrationTest(type: Test) {
+    useJUnitPlatform() // Use Junit5
+    description = 'Runs integration tests.' // タスク説明
+    group = 'verification' // テストなのでverificationグループに設定
+    testClassesDirs = sourceSets.integrationTest.output.classesDirs
+    classpath = sourceSets.integrationTest.runtimeClasspath
+    println classpath.asPath
+    outputs.upToDateWhen { false }
+}
+
+//check.dependsOn integrationTest
+
+// ---------- Integration Test Settings [END] ----------
 

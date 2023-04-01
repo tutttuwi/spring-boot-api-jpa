@@ -27,28 +27,28 @@ public class BaseEntity {
    * データ登録日時
    */
   @CreatedDate
-  @Column(name = "createDt")
+  @Column(name = "create_dt")
   private LocalDateTime createDt;
 
   /**
    * データ登録ユーザ名
    */
   @CreatedBy
-  @Column(name = "createUser")
+  @Column(name = "create_user")
   private String createUser;
 
   /**
    * データ更新日時
    */
   @LastModifiedDate
-  @Column(name = "updateDt")
+  @Column(name = "update_dt")
   private LocalDateTime updateDt;
 
   /**
    * データ更新ユーザ名
    */
   @LastModifiedBy
-  @Column(name = "updateUser")
+  @Column(name = "update_user")
   private String updateUser;
 
 //    /**

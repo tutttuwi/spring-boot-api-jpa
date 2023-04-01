@@ -1,8 +1,11 @@
 package com.example.system.domain.service.impl;
 
+import static com.example.system.config.JpaSystemDbRefConfig.SYSTEM_DB_REF_TRANSACTION_MANAGER;
+
 import com.example.system.domain.model.UserDto;
 import com.example.system.domain.model.entity.User;
-import com.example.system.domain.repository.UserRepository;
+import com.example.system.domain.repository.systemdb.UserRepository;
+import com.example.system.domain.repository.systemdbref.UserRepositoryRef;
 import com.example.system.domain.service.UserService;
 import com.example.system.exception.NoDataFoundException;
 import java.util.List;
@@ -12,32 +15,31 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Slf4j
 public class UserServiceImpl implements UserService {
   UserRepository userRepository;
+  UserRepositoryRef userRepositoryRef;
   ModelMapper mapper;
 
   @Autowired
-  UserServiceImpl(UserRepository userRepository, ModelMapper mapper) {
+  UserServiceImpl(UserRepository userRepository, ModelMapper mapper,
+                  UserRepositoryRef userRepositoryRef) {
     this.userRepository = userRepository;
     this.mapper = mapper;
+    this.userRepositoryRef = userRepositoryRef;
   }
 
   @Override
+  @Transactional(readOnly = true, transactionManager = SYSTEM_DB_REF_TRANSACTION_MANAGER)
   public List<UserDto> searchUserList(UserDto userDto) {
     User tarUser = mapper.map(userDto, User.class);
-//        List<User> userList = userRepository.findAll();
-    List<User> userList = userRepository.findAllUserList(tarUser);
-//        List<UserDto> userDtoList = userList.stream().map(UserDto::of).collect(Collectors.toList());
-//        List<User> userList = userRepository.findAllUsers();
-
-//        List<UserDto> userDtoList = userList.stream().map(UserDto::of).collect(Collectors.toList());
+    List<User> userList = userRepositoryRef.findAllUserList(tarUser);
     List<UserDto> userDtoList =
         userList.stream().map(user -> mapper.map(user, UserDto.class)).collect(Collectors.toList());
     log.info(userList.toString());
-//        log.info(ToStringBuilder.reflectionToString(userList));
     for (User user : userList) {
       log.info(ToStringBuilder.reflectionToString(user));
     }
@@ -45,8 +47,9 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
+  @Transactional(readOnly = true, transactionManager = SYSTEM_DB_REF_TRANSACTION_MANAGER)
   public UserDto searchUser(Long userId) {
-    User user = userRepository.findById(userId)
+    User user = userRepositoryRef.findById(userId)
         .orElseThrow(() -> new NoDataFoundException(String.valueOf(userId)));
     UserDto userDto = mapper.map(user, UserDto.class);
 //        UserDto userDto = UserDto.of(user);

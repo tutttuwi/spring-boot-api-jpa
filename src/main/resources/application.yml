@@ -13,7 +13,7 @@ spring:
     basename: i18n/messages # message file path (exclude extension)
   output:
     ansi.enabled: ALWAYS
-  jpa.properties.hibernate.format_sql: true
+#  jpa.properties.hibernate.format_sql: true
   jpa:
     database: POSTGRESQL
     hibernate:

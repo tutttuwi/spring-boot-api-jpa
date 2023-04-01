@@ -1,5 +1,7 @@
 package com.example.system.controller;
 
+import static com.example.system.config.JpaSystemDbConfig.SYSTEM_DB_TRANSACTION_MANAGER;
+
 import com.example.system.constant.HttpStatusConst;
 import com.example.system.controller.model.SystemAbstractResponse;
 import com.example.system.controller.model.SystemErrorResponse;
@@ -18,6 +20,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -56,6 +59,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * ユーザ情報コントローラ.<br/>
  */
+@Transactional(transactionManager = SYSTEM_DB_TRANSACTION_MANAGER)
 public interface UserController {
 
   /**

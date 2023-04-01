@@ -21,13 +21,13 @@ import lombok.Setter;
 public class User extends BaseEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "userId")
+  @Column(name = "user_id")
   private Long userId;
-  @Column(name = "fstName")
+  @Column(name = "fst_name")
   private String fstName;
-  @Column(name = "lstName")
+  @Column(name = "lst_name")
   private String lstName;
-  @Column(name = "birthDt")
+  @Column(name = "birth_dt")
   private LocalDate birthDt;
 
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
