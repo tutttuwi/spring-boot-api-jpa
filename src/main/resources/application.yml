@@ -1,10 +1,14 @@
 # refer to the Common Application properties
 # <https://docs.spring.io/spring-boot/docs/current/reference/html/appendix-application-properties.html#common-application-properties>
+# ※運用方法※
+# 全環境 共通定義したいアプリケーション設定をこちらに定義します。
+# 個別に環境毎の定義をしたい場合は、profileを切り替えて、環境ごとのapplication.ymlファイルを作成してください。
+
 spring:
   profiles:
     active: dev # default active profile
   application:
-    name: system-app-name # CUSTOM YOUR APP NAME HERE
+    name: system-app-name # CUSTOM YOUR APP NAME HERE //TODO: システム個別設定
   messages:
     basename: i18n/messages # message file path (exclude extension)
   output:
@@ -43,7 +47,7 @@ management:
 server:
   port: 8080
   servlet:
-    context-path: /system
+    context-path: /system # //TODO: システム個別設定
   #  error:
   #    path: "/error"
 
@@ -55,10 +59,11 @@ server:
 #    hashWidth: 256
 #
 
+# ログ設定
 logging:
   pattern:
-    # MDCで設定した値を出力する TODO: 設定調整
-    level: "[%X{X_TRACK_ID}:%X{X_SESSION_ID}:%X{X_REQUEST_ID}] %5p"
+    # MDCで設定した値を出力する //TODO: システム個別設定 MDC設定を変更したい場合調整
+    level: "[%X{X-System-Track-Id}:%X{X-System-Session-Id}:%X{X-System-Request-Id}] %5p"
   level:
     org.hibernate.SQL: debug
     org.hibernate.type.descriptor.sql.BasicBinder: trace

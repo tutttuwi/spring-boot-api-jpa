@@ -1,28 +1,29 @@
 package com.example.system.constant;
 
 /**
- * 定数定義.
+ * MDCログ用 定数定義.<br/>
+ * MDC(Mapped Diagnostic Contexts)ログに設定するキーを管理します。
  */
 public enum MdcConst {
-    // @formatter:off
+  // @formatter:off
+  X_TRACK_ID("X-System-Track-Id"), //TODO: システム個別設定
 
-    X_TRACK_ID("X_TRACK_ID"),
-    X_SESSION_ID("X_SESSION_ID"),
-    X_REQUEST_ID("X_REQUEST_ID"),
-    ;
+  X_SESSION_ID("X-System-Session-Id"), //TODO: システム個別設定
+  X_REQUEST_ID("X-System-Request-Id"), //TODO: システム個別設定
+  ;
 
-    // @formatter:on
+  // @formatter:on
 
-    /**
-     * Property Key Name.
-     */
-    public final String KEY;
+  /**
+   * Property Key Name.
+   */
+  public final String KEY;
 
-    /**
-     * Constractor.
-     */
-    private MdcConst(String key) {
-        this.KEY = key;
-    }
+  /**
+   * Constractor.
+   */
+  MdcConst(String key) {
+    this.KEY = key;
+  }
 
 }

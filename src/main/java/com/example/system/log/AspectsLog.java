@@ -8,42 +8,46 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 
+/**
+ * Aspectsログ設定<br/>
+ * Controller/Service/Repository等必要な箇所に差し込むログ設定を管理します。
+ */
 @Aspect
 @Component
 @Slf4j
 public class AspectsLog {
 
-    @Before("within(com.example.system.controller.impl.*)")
-    public void printControllerBefore(JoinPoint joinPoint) throws Exception {
+  @Before("within(com.example.system.controller.impl.*)")
+  public void printControllerBefore(JoinPoint joinPoint) throws Exception {
 
-        log.info("[{}] {} - {}",
-                "START",
-                joinPoint.getSignature().getDeclaringType().getSimpleName(),
-                ((MethodSignature) joinPoint.getSignature()).getMethod().getName());
-    }
+    log.info("[{}] {} - {}",
+        "START",
+        joinPoint.getSignature().getDeclaringType().getSimpleName(),
+        ((MethodSignature) joinPoint.getSignature()).getMethod().getName());
+  }
 
-    @After("within(com.example.system.controller.impl.*)")
-    public void printControllerAfter(JoinPoint joinPoint) throws Exception {
-        log.info("[{}] {} - {}",
-                "END",
-                joinPoint.getSignature().getDeclaringType().getSimpleName(),
-                ((MethodSignature) joinPoint.getSignature()).getMethod().getName());
-    }
+  @After("within(com.example.system.controller.impl.*)")
+  public void printControllerAfter(JoinPoint joinPoint) throws Exception {
+    log.info("[{}] {} - {}",
+        "END",
+        joinPoint.getSignature().getDeclaringType().getSimpleName(),
+        ((MethodSignature) joinPoint.getSignature()).getMethod().getName());
+  }
 
-    @Before("within(com.example.system.domain.service.impl.*)")
-    public void printServiceBefore(JoinPoint joinPoint) throws Exception {
-        log.info("[{}] {} - {}",
-                "START",
-                joinPoint.getSignature().getDeclaringType().getSimpleName(),
-                ((MethodSignature) joinPoint.getSignature()).getMethod().getName());
-    }
+  @Before("within(com.example.system.domain.service.impl.*)")
+  public void printServiceBefore(JoinPoint joinPoint) throws Exception {
+    log.info("[{}] {} - {}",
+        "START",
+        joinPoint.getSignature().getDeclaringType().getSimpleName(),
+        ((MethodSignature) joinPoint.getSignature()).getMethod().getName());
+  }
 
-    @After("within(com.example.system.domain.service.impl.*)")
-    public void printServiceAfter(JoinPoint joinPoint) throws Exception {
-        log.info("[{}] {} - {}",
-                "END",
-                joinPoint.getSignature().getDeclaringType().getSimpleName(),
-                ((MethodSignature) joinPoint.getSignature()).getMethod().getName());
-    }
+  @After("within(com.example.system.domain.service.impl.*)")
+  public void printServiceAfter(JoinPoint joinPoint) throws Exception {
+    log.info("[{}] {} - {}",
+        "END",
+        joinPoint.getSignature().getDeclaringType().getSimpleName(),
+        ((MethodSignature) joinPoint.getSignature()).getMethod().getName());
+  }
 
 }

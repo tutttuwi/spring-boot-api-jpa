@@ -1,14 +1,14 @@
 package com.example.system.constant;
 
 /**
- * AlphaNumeric Const Class.
+ * 記号定数管理.
  */
 public enum SymbolConst {
-    UNDER_SCORE("_"), DOT("."), SHARP("#");
+  UNDER_SCORE("_"), DOT("."), SHARP("#");
 
-    public final String VALUE;
+  public final String VALUE;
 
-    private SymbolConst(String value) {
-        this.VALUE = value;
-    }
+  SymbolConst(String value) {
+    this.VALUE = value;
+  }
 }

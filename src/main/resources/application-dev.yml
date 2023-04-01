@@ -1,4 +1,4 @@
-# Development
+# Development Environment
 
 spring:
   datasource:
@@ -21,11 +21,6 @@ spring:
       #exclude: "**/*.yml, **/*.xml" # 再起動のトリガーから除外するファイルを設定（上書）
       additional-exclude: "**/*.yml, **/*.xml" # 再起動のトリガーから除外するファイルを追加で設定
       livereload.enabled: true # LiveReloadを有効にする（デフォルトでTRUEなので必要あればFalseを設定）
-
-settings:
-  uri:
-    schema: http
-    host: localhost:8080
 
 logging:
   level:

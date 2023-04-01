@@ -11,17 +11,17 @@ import org.springframework.context.ApplicationContext;
  */
 @Slf4j
 public class AbstractBaseController {
-    
-    @Autowired
-    protected ApplicationContext applicationContext;
 
-    /**
-     * コンテキストを返します.
-     *
-     * @return
-     */
-    protected ApplicationContext getApplicationContext() {
-        return applicationContext;
-    }
+  @Autowired
+  protected ApplicationContext applicationContext;
+
+  /**
+   * コンテキストを返します.
+   *
+   * @return
+   */
+  protected ApplicationContext getApplicationContext() {
+    return applicationContext;
+  }
 
 }

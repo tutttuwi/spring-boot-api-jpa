@@ -3,7 +3,7 @@ package com.example.system.domain.model.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
-import jakarta.persistence.PrePersist;
+import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedBy;
@@ -11,9 +11,6 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 /**
  * テーブルの共通項目を定義したクラスです。</br>
@@ -26,33 +23,33 @@ import java.time.LocalTime;
 @EntityListeners(AuditingEntityListener.class) // SpringDataが提供している監査記録用のEventListener
 public class BaseEntity {
 
-    /**
-     * データ登録日時
-     */
-    @CreatedDate
-    @Column(name = "createDt")
-    private LocalDateTime createDt;
+  /**
+   * データ登録日時
+   */
+  @CreatedDate
+  @Column(name = "createDt")
+  private LocalDateTime createDt;
 
-    /**
-     * データ登録ユーザ名
-     */
-    @CreatedBy
-    @Column(name = "createUser")
-    private String createUser;
+  /**
+   * データ登録ユーザ名
+   */
+  @CreatedBy
+  @Column(name = "createUser")
+  private String createUser;
 
-    /**
-     * データ更新日時
-     */
-    @LastModifiedDate
-    @Column(name = "updateDt")
-    private LocalDateTime updateDt;
+  /**
+   * データ更新日時
+   */
+  @LastModifiedDate
+  @Column(name = "updateDt")
+  private LocalDateTime updateDt;
 
-    /**
-     * データ更新ユーザ名
-     */
-    @LastModifiedBy
-    @Column(name = "updateUser")
-    private String updateUser;
+  /**
+   * データ更新ユーザ名
+   */
+  @LastModifiedBy
+  @Column(name = "updateUser")
+  private String updateUser;
 
 //    /**
 //     * データ登録前に共通的に実行されるメソッド

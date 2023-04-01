@@ -9,7 +9,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * Validation用プロパティとメッセージプロパティを統合.
- *
  */
 @Configuration
 public class MessageConfig implements WebMvcConfigurer {

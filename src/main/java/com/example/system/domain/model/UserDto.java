@@ -1,25 +1,19 @@
 package com.example.system.domain.model;
 
-import com.example.system.controller.model.users.PostUsersRequest;
-import com.example.system.controller.model.users.PutUsersRequest;
-import com.example.system.domain.model.entity.User;
-import com.example.system.domain.model.entity.UserEmail;
-import lombok.Data;
-
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
+import lombok.Data;
 
 @Data
 public class UserDto {
-    private Long userId;
-    private String fstName;
-    private String lstName;
-    private LocalDate birthDt;
-    private List<UserEmailDto> userEmail;
+  private Long userId;
+  private String fstName;
+  private String lstName;
+  private LocalDate birthDt;
+  private List<UserEmailDto> userEmail;
 
 
-    // modelからrepositoryに依存させない
+  // modelからrepositoryに依存させない
 //    public static UserDto of(User user) {
 //        UserDto dto = new UserDto();
 //        dto.setUserId(user.getUserId());

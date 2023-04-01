@@ -1,18 +1,21 @@
 package com.example.system.domain.service;
 
 import com.example.system.domain.model.UserDto;
+import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Transactional
 @Service
 public interface UserService {
 
-    public List<UserDto> searchUserList(UserDto userDto);
-    public UserDto searchUser(Long userId);
-    public UserDto createUser(UserDto userDto);
-    public UserDto updateUser(UserDto userDto);
-    public void deleteUser(Long userId);
+  List<UserDto> searchUserList(UserDto userDto);
+
+  UserDto searchUser(Long userId);
+
+  UserDto createUser(UserDto userDto);
+
+  UserDto updateUser(UserDto userDto);
+
+  void deleteUser(Long userId);
 }

@@ -14,23 +14,24 @@ import org.webjars.NotFoundException;
 @RequestMapping("/error")
 public class ErrorControllerImpl extends AbstractBaseController implements ErrorController {
 
-    /**
-     * コンストラクター
-     */
-    ErrorControllerImpl() {
-    }
+  /**
+   * コンストラクター
+   */
+  ErrorControllerImpl() {
+  }
 
-    /**
-     * JSON レスポンス用の ResponseEntity オブジェクトを返す。
-     *
-     * @return JSON レスポンス用の ResponseEntity オブジェクト
-     */
-    @RequestMapping
-    public ResponseEntity<Object> error() {
-        // Create Response
-        SystemErrorResponse response = new SystemErrorResponse(HttpStatus.NOT_FOUND, new NotFoundException("Not Found Resouces"));
-        // Return Json
-        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
-    }
+  /**
+   * JSON レスポンス用の ResponseEntity オブジェクトを返す。
+   *
+   * @return JSON レスポンス用の ResponseEntity オブジェクト
+   */
+  @RequestMapping
+  public ResponseEntity<Object> error() {
+    // Create Response
+    SystemErrorResponse response =
+        new SystemErrorResponse(HttpStatus.NOT_FOUND, new NotFoundException("Not Found Resouces"));
+    // Return Json
+    return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+  }
 
 }

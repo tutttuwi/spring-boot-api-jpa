@@ -10,10 +10,10 @@ package com.example.system.constant;
  */
 public interface HttpStatusConst {
 
-    public static final String OK = "200";
-    public static final String CREATED = "201";
-    public static final String NO_CONTENT = "204";
-    public static final String BAD_REQUEST = "400";
-    public static final String NOT_FOUND = "404";
-    public static final String INTERNAL_SERVER_ERROR = "500";
+  String OK = "200";
+  String CREATED = "201";
+  String NO_CONTENT = "204";
+  String BAD_REQUEST = "400";
+  String NOT_FOUND = "404";
+  String INTERNAL_SERVER_ERROR = "500";
 }

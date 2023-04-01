@@ -11,29 +11,29 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 @ServletComponentScan(basePackages = "com.example.system") // @WebFilterを認識させるため付与
 public class SystemConfig {
 
-    /**
-     * Bean変換用マッパー.<br/>
-     *
-     * @return
-     */
-    @Bean
-    public ModelMapper modelMapper() {
-        return new ModelMapper();
-    }
+  /**
+   * Bean変換用マッパー.<br/>
+   *
+   * @return
+   */
+  @Bean
+  public ModelMapper modelMapper() {
+    return new ModelMapper();
+  }
 
-    /**
-     * メッセージリソース設定. <br/>
-     * 必要に応じてリソースファイルを切り替えることで多言語化対応を行う
-     *
-     * @return messageSource
-     */
-    @Bean
-    public MessageSource messageSource() {
-        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-        messageSource.setBasenames("i18n/messages"); // クラスパス上に格納されているプロパティファイル（拡張子は除く）を指定する
-        messageSource.setDefaultEncoding("UTF-8");
-        return messageSource;
-    }
+  /**
+   * メッセージリソース設定. <br/>
+   * 必要に応じてリソースファイルを切り替えることで多言語化対応を行う
+   *
+   * @return messageSource
+   */
+  @Bean
+  public MessageSource messageSource() {
+    ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+    messageSource.setBasenames("i18n/messages"); // クラスパス上に格納されているプロパティファイル（拡張子は除く）を指定する
+    messageSource.setDefaultEncoding("UTF-8");
+    return messageSource;
+  }
 
 //    /**
 //     * デフォルトのロケール定義.

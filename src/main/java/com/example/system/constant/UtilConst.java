@@ -19,9 +19,8 @@ public enum UtilConst {
 
   /**
    * Constractor.
-   *
    */
-  private UtilConst(String key) {
+  UtilConst(String key) {
     this.KEY = key;
   }
 
