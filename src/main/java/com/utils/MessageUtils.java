@@ -1,4 +1,4 @@
-package com.example.system.utils;
+package com.utils;
 
 import java.util.Locale;
 import lombok.extern.slf4j.Slf4j;

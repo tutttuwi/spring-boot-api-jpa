@@ -21,7 +21,7 @@ import org.springframework.context.annotation.Configuration;
  * Testに必要なBean定義などを管理.<br/>
  */
 @Configuration
-public class SystemTestConfiguration {
+public class SystemIntegrationTestConfiguration {
 
   public static final String SYSTEM_DB_DATASOURCE_TEST = "systemDbTest";
   public static final String SYSTEM_DB_REF_DATASOURCE_TEST = "systemDbRefTest";

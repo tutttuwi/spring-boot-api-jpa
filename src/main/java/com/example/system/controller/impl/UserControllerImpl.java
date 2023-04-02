@@ -7,9 +7,9 @@ import com.example.system.controller.model.users.GetUsersRequest;
 import com.example.system.controller.model.users.PostUsersRequest;
 import com.example.system.controller.model.users.PutUsersRequest;
 import com.example.system.domain.model.UserDto;
-import com.example.system.domain.service.UserService;
 import com.example.system.domain.service.impl.UserServiceImpl;
 import com.example.system.exception.ValidationErrorException;
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +20,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import org.springframework.web.util.UriComponents;
 
 @Slf4j
 @RestController
@@ -64,9 +63,9 @@ public class UserControllerImpl extends AbstractBaseController implements UserCo
       throw new ValidationErrorException(result.getFieldErrors());
     }
     UserDto createdDto = userService.createUser(mapper.map(usersReq, UserDto.class));
-    UriComponents uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{userId}")
-        .buildAndExpand(createdDto.getUserId());
-    return ResponseEntity.created(uri.toUri())
+    URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+        .pathSegment(createdDto.getUserId().toString()).build().encode().toUri();
+    return ResponseEntity.created(uri)
         .body(new SystemSuccessResponse(HttpStatus.CREATED, createdDto));
   }
 
