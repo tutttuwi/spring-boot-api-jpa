@@ -5,7 +5,7 @@ import static com.example.system.config.JpaSystemDbConfig.SYSTEM_DB_REPOSITORY_P
 
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,32 +24,33 @@ public class JpaSystemDbConfig {
   public static final String SYSTEM_DB_REPOSITORY_PACKAGE =
       "com.example.system.domain.repository.systemdb";
   public static final String SYSTEM_DB_DATASOURCE = "systemDb";
-  //  public static final String SYSTEM_DB_CONFIG = "spring.datasource.systemdb";
+  public static final String SYSTEM_DB_CONFIG = "spring.datasource.systemdb";
   public static final String SYSTEM_DB_ENTITY_MANAGER = "systemdbEntityManager";
   public static final String SYSTEM_DB_ENTITY_PACKAGE = "com.example.system.domain.model.entity";
 
   // [transactionManager]の名前で定義されてないと、JPAでエラーになるため、PrimaryのTransactionManager名は[transactionManager]で定義
   public static final String SYSTEM_DB_TRANSACTION_MANAGER = "transactionManager";
-  @Value("${spring.datasource.systemdb.driverClassName}")
-  private String driverClassName;
-  @Value("${spring.datasource.systemdb.url}")
-  private String url;
-  @Value("${spring.datasource.systemdb.username}")
-  private String username;
-  @Value("${spring.datasource.systemdb.password}")
-  private String password;
+//  @Value("${spring.datasource.systemdb.driverClassName}")
+//  private String driverClassName;
+//  @Value("${spring.datasource.systemdb.url}")
+//  private String url;
+//  @Value("${spring.datasource.systemdb.username}")
+//  private String username;
+//  @Value("${spring.datasource.systemdb.password}")
+//  private String password;
 
-  //  @ConfigurationProperties(prefix = SYSTEM_DB_CONFIG) // MEMO: 読み込めない、原因調査必要、@Valueで読み込んで回避
+  @ConfigurationProperties(prefix = SYSTEM_DB_CONFIG)
   @Bean(SYSTEM_DB_DATASOURCE)
   @Primary
   public DataSource createDataSource() {
-    return DataSourceBuilder
-        .create()
-        .driverClassName(driverClassName)
-        .url(url)
-        .username(username)
-        .password(password)
-        .build();
+    return DataSourceBuilder.create().build();
+//    return DataSourceBuilder
+//        .create()
+//        .driverClassName(driverClassName)
+//        .url(url)
+//        .username(username)
+//        .password(password)
+//        .build();
   }
 
   @Bean(name = SYSTEM_DB_ENTITY_MANAGER)

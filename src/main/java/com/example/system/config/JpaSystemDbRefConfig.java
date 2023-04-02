@@ -5,11 +5,10 @@ import static com.example.system.config.JpaSystemDbRefConfig.SYSTEM_DB_REF_REPOS
 
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -24,34 +23,37 @@ public class JpaSystemDbRefConfig {
 
   public static final String SYSTEM_DB_REF_REPOSITORY_PACKAGE =
       "com.example.system.domain.repository.systemdbref";
-  public static final String SYSTEM_DB_DATASOURCE = "systemDbRef";
-  public static final String SYSTEM_DB_REF_ENTITY_MANAGER = "systemdbrefEntityManager";
-  public static final String SYSTEM_DB_REF_ENTITY_PACKAGE = "com.example.system.domain.model.entity";
-  public static final String SYSTEM_DB_REF_TRANSACTION_MANAGER = "transactionManagerRef";
-  @Value("${spring.datasource.systemdbref.driverClassName}")
-  private String driverClassName;
-  @Value("${spring.datasource.systemdbref.url}")
-  private String url;
-  @Value("${spring.datasource.systemdbref.username}")
-  private String username;
-  @Value("${spring.datasource.systemdbref.password}")
-  private String password;
+  public static final String SYSTEM_DB_REF_CONFIG = "spring.datasource.systemdbref";
 
-  @Bean(SYSTEM_DB_DATASOURCE)
-  @Primary
+  public static final String SYSTEM_DB_REF_DATASOURCE = "systemDbRef";
+  public static final String SYSTEM_DB_REF_ENTITY_MANAGER = "systemdbrefEntityManager";
+  public static final String SYSTEM_DB_REF_ENTITY_PACKAGE =
+      "com.example.system.domain.model.entity";
+  public static final String SYSTEM_DB_REF_TRANSACTION_MANAGER = "transactionManagerRef";
+//  @Value("${spring.datasource.systemdbref.driverClassName}")
+//  private String driverClassName;
+//  @Value("${spring.datasource.systemdbref.url}")
+//  private String url;
+//  @Value("${spring.datasource.systemdbref.username}")
+//  private String username;
+//  @Value("${spring.datasource.systemdbref.password}")
+//  private String password;
+
+  @ConfigurationProperties(prefix = SYSTEM_DB_REF_CONFIG)
+  @Bean(SYSTEM_DB_REF_DATASOURCE)
   public DataSource createDataSource() {
     return DataSourceBuilder
         .create()
-        .driverClassName(driverClassName)
-        .url(url)
-        .username(username)
-        .password(password)
+//        .driverClassName(driverClassName)
+//        .url(url)
+//        .username(username)
+//        .password(password)
         .build();
   }
 
   @Bean(name = SYSTEM_DB_REF_ENTITY_MANAGER)
   public LocalContainerEntityManagerFactoryBean jpaEntityManagerFactory(
-      @Qualifier(SYSTEM_DB_DATASOURCE) DataSource dataSource) {
+      @Qualifier(SYSTEM_DB_REF_DATASOURCE) DataSource dataSource) {
     LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
     factory.setDataSource(dataSource);
     factory.setPackagesToScan(SYSTEM_DB_REF_ENTITY_PACKAGE);

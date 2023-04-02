@@ -12,7 +12,6 @@ public class UserDto {
   private LocalDate birthDt;
   private List<UserEmailDto> userEmail;
 
-
   // modelからrepositoryに依存させない
 //    public static UserDto of(User user) {
 //        UserDto dto = new UserDto();

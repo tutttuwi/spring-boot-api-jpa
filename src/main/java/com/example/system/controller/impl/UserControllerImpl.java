@@ -26,7 +26,7 @@ import org.springframework.web.util.UriComponents;
 @RestController
 public class UserControllerImpl extends AbstractBaseController implements UserController {
 
-  private final UserService userService;
+  private final UserServiceImpl userService;
   private final ModelMapper mapper;
 
   /**

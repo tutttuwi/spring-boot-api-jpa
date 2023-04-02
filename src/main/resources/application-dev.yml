@@ -3,14 +3,15 @@
 spring:
   datasource:
     systemdb:
-      #    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=dev
-      url: jdbc:postgresql://localhost:15432/root?currentSchema=public
+      # SpringBootデフォルトのurlプロパティでは`@ConfigurationProperties`で解決できず、jdbcUrlプロパティに変更
+      jdbcUrl: jdbc:postgresql://localhost:15432/root?currentSchema=public
+#      url: jdbc:postgresql://localhost:15432/root?currentSchema=public
       username: root
       password: root
       driverClassName: org.postgresql.Driver
     systemdbref:
-      #    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=dev
-      url: jdbc:postgresql://localhost:15432/root?currentSchema=public
+      jdbcUrl: jdbc:postgresql://localhost:15432/root?currentSchema=public
+#      url: jdbc:postgresql://localhost:15432/root?currentSchema=public
       username: root
       password: root
       driverClassName: org.postgresql.Driver
