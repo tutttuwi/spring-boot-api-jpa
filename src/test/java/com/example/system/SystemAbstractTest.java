@@ -17,7 +17,6 @@ import org.springframework.test.context.ActiveProfiles;
  * 上書きが必要なクラスだけクラス内で上書く形とする
  */
 @Slf4j
-@SpringBootTest
 @ActiveProfiles("test")
 public abstract class SystemAbstractTest {
 

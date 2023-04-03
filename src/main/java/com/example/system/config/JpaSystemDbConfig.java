@@ -3,6 +3,7 @@ package com.example.system.config;//package com.example.system.config;
 import static com.example.system.config.JpaSystemDbConfig.SYSTEM_DB_ENTITY_MANAGER;
 import static com.example.system.config.JpaSystemDbConfig.SYSTEM_DB_REPOSITORY_PACKAGE;
 
+import jakarta.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -68,13 +69,21 @@ public class JpaSystemDbConfig {
     return factory;
   }
 
+//  @Primary
+//  @Bean(SYSTEM_DB_TRANSACTION_MANAGER)
+//  public PlatformTransactionManager dbTransactionManager(
+//      @Qualifier(SYSTEM_DB_ENTITY_MANAGER) EntityManagerFactory entityManagerFactory
+//  ) {
+//    return new JpaTransactionManager(entityManagerFactory);
+//  }
+
   @Primary
   @Bean(SYSTEM_DB_TRANSACTION_MANAGER)
   public PlatformTransactionManager dbTransactionManager() {
-    JpaTransactionManager transactionManager
-        = new JpaTransactionManager();
+    JpaTransactionManager transactionManager = new JpaTransactionManager();
     transactionManager.setEntityManagerFactory(
         jpaEntityManagerFactory(createDataSource()).getObject());
     return transactionManager;
   }
+
 }

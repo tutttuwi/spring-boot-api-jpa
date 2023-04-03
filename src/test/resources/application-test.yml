@@ -4,40 +4,45 @@
 #
 # ============================================================
 
+spring:
+#  jpa:
+#    hibernate:
+#      ddl-auto: create-drop
+  datasource:
+#    url: jdbc:h2:mem:demodb;MODE=PostgreSQL
+#    username: sa
+#    password: dm
+#    driver-class-name: org.h2.Driver
+    systemdb:
+#      url: jdbc:h2:mem:rootdb;MODE=PostgreSQL;INIT=RUNSCRIPT FROM 'src/test/resources/schema-h2-systemdb.sql'\;
+#      jdbcUrl: jdbc:h2:mem:rootdb;MODE=PostgreSQL;DB_CLOSE_ON_EXIT=TRUE;INIT=RUNSCRIPT FROM 'src/test/resources/schema-h2-systemdb.sql'\;
+      jdbcUrl: jdbc:h2:mem:rootdb;MODE=PostgreSQL;INIT=RUNSCRIPT FROM 'src/test/resources/schema-h2-systemdb.sql'\;
+      username: root
+      password: root
+      driverClassName: org.h2.Driver
+    systemdbref:
+#      url: jdbc:h2:mem:rootdbref;MODE=PostgreSQL;INIT=RUNSCRIPT FROM 'src/test/resources/schema-h2-systemdbref.sql'\;
+#      jdbcUrl: jdbc:h2:mem:rootdbref;MODE=PostgreSQL;DB_CLOSE_ON_EXIT=TRUE;INIT=RUNSCRIPT FROM 'src/test/resources/schema-h2-systemdbref.sql'\;
+      jdbcUrl: jdbc:h2:mem:rootdbref;MODE=PostgreSQL;INIT=RUNSCRIPT FROM 'src/test/resources/schema-h2-systemdbref.sql'\;
+      username: rootref
+      password: rootref
+      driverClassName: org.h2.Driver
+
 #spring:
 #  datasource:
-##    url: jdbc:h2:mem:demodb;MODE=PostgreSQL
-##    username: sa
-##    password: dm
-##    driver-class-name: org.h2.Driver
 #    systemdb:
-##      url: jdbc:h2:mem:rootdb;MODE=PostgreSQL;INIT=RUNSCRIPT FROM 'src/test/resources/schema-h2-systemdb.sql'\;
-#      jdbcUrl: jdbc:h2:mem:rootdb;MODE=PostgreSQL;INIT=RUNSCRIPT FROM 'src/test/resources/schema-h2-systemdb.sql'\;
+#      # SpringBootデフォルトのurlプロパティでは`@ConfigurationProperties`で解決できず、jdbcUrlプロパティに変更
+#      jdbcUrl: jdbc:postgresql://localhost:15432/root?currentSchema=public
+#      #      url: jdbc:postgresql://localhost:15432/root?currentSchema=public
 #      username: root
 #      password: root
-#      driverClassName: org.h2.Driver
+#      driverClassName: org.postgresql.Driver
 #    systemdbref:
-##      url: jdbc:h2:mem:rootdbref;MODE=PostgreSQL;INIT=RUNSCRIPT FROM 'src/test/resources/schema-h2-systemdbref.sql'\;
-#      jdbcUrl: jdbc:h2:mem:rootdbref;MODE=PostgreSQL;INIT=RUNSCRIPT FROM 'src/test/resources/schema-h2-systemdbref.sql'\;
-#      username: rootref
-#      password: rootref
-#      driverClassName: org.h2.Driver
-
-spring:
-  datasource:
-    systemdb:
-      # SpringBootデフォルトのurlプロパティでは`@ConfigurationProperties`で解決できず、jdbcUrlプロパティに変更
-      jdbcUrl: jdbc:postgresql://localhost:15432/root?currentSchema=public
-      #      url: jdbc:postgresql://localhost:15432/root?currentSchema=public
-      username: root
-      password: root
-      driverClassName: org.postgresql.Driver
-    systemdbref:
-      jdbcUrl: jdbc:postgresql://localhost:15432/root?currentSchema=public
-      #      url: jdbc:postgresql://localhost:15432/root?currentSchema=public
-      username: root
-      password: root
-      driverClassName: org.postgresql.Driver
+#      jdbcUrl: jdbc:postgresql://localhost:15432/root?currentSchema=public
+#      #      url: jdbc:postgresql://localhost:15432/root?currentSchema=public
+#      username: root
+#      password: root
+#      driverClassName: org.postgresql.Driver
 
 #    systemdb:
 #      #    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=dev
