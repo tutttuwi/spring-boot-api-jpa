@@ -5,6 +5,8 @@ plugins {
 //    id "org.hibernate.gradle.tools" version "1.2.4"
     id 'jacoco'
     id "org.sonarqube" version "3.5.0.2730" // @see <https://plugins.gradle.org/plugin/org.sonarqube>
+    id 'test-report-aggregation' //TODO: 挙動調査
+    id 'jacoco-report-aggregation' //TODO: 挙動調査
 }
 
 group = 'com.example'
@@ -61,7 +63,6 @@ dependencies {
     testCompileOnly 'org.projectlombok:lombok:1.18.20'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'
     testImplementation group: 'org.slf4j', name: 'slf4j-api', version: '2.0.7'
-
 
 
     // SpringDoc2 SpringBoot3対応
@@ -242,6 +243,10 @@ task hbm2java {
 // ---------- jacoco(Java Code Coverage Tools) [START] ----------
 test.finalizedBy jacocoTestReport // testタスクの後にレポート作成
 jacocoTestReport {
+//    executionData(file("${project.buildDir}/jacoco/test.exec"),
+//            file("${project.buildDir}/jacoco/integrationTest.exec"))
+//    executionData tasks.withType(Test).findAll { it.state.executed }
+
     reports {
         // 必要に応じてレポート作成
         // xml.enabled(true) -> enabled is deprecated. use required instead @see <https://stackoverflow.com/questions/73546718/changing-enabled-to-required-throws-an-error-in-gradle>
@@ -259,6 +264,7 @@ jacocoTestReport {
 // ---------- sonar qube [START] ----------
 //test.finalizedBy sonar // testタスクの後にレポート作成
 sonarqube {
+    group = "verification"
     properties {
         // 特定のクラスを除外したい場合設定
 //        property "sonar.exclusions", "src/main/java/com/example/system/*"
